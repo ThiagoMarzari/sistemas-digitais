@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/laboratorio/projeto_aula/projeto_aula.srcs/sources_1/new/variaveis_ex.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity variaveis_ex
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/laboratorio/projeto_aula/projeto_aula.srcs/sim_1/new/testbench.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testbench
