@@ -1,43 +1,69 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 10.09.2025 10:08:18
--- Design Name: 
--- Module Name: porta_senha - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
 
+ENTITY porta_senha IS
+  PORT (
+    clk : IN STD_LOGIC;
+    reset : IN STD_LOGIC;
+    entrada : IN STD_LOGIC;
+    aberta : OUT STD_LOGIC
+  );
+END porta_senha;
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+ARCHITECTURE moore OF porta_senha IS
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+  TYPE state_type IS (S0, S1, S11, S110, S1101);
+  SIGNAL estado, prox_estado : state_type;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+BEGIN
+  PROCESS (clk, reset)
+  BEGIN
+    IF reset = '1' THEN
+      estado <= S0;
+    ELSIF rising_edge(clk) THEN
+      estado <= prox_estado;
+    END IF;
+  END PROCESS;
 
-entity porta_senha is
---  Port ( );
-end porta_senha;
+  PROCESS (estado, entrada)
+  BEGIN
+    aberta <= '0'; --Padrao: Porta fechada
 
-architecture Behavioral of porta_senha is
+    CASE estado IS
+      WHEN S0 =>
+        IF entrada = '1' THEN
+          prox_estado <= S1;
+        ELSE
+          prox_estado <= S0;
+        END IF;
+      WHEN S1 =>
+        IF entrada = '1' THEN
+          prox_estado <= S11;
+        ELSE
+          prox_estado <= S0;
+        END IF;
+      WHEN S11 =>
+        IF entrada = '0' THEN
+          prox_estado <= S110;
+        ELSE
+          prox_estado <= S11;
+        END IF;
+      WHEN S110 =>
+        IF entrada = '1' THEN
+          prox_estado <= S1101;
+        ELSE
+          prox_estado <= S0;
+        END IF;
+      WHEN S1101 =>
+        aberta <= '1'; --Senha correta, porta aberta
+        IF entrada = '1' THEN
+          prox_estado <= S1;
+        ELSE
+          prox_estado <= S0;
+        END IF;
+      WHEN OTHERS =>
+        prox_estado <= S0;
+    END CASE;
+  END PROCESS;
 
-begin
-
-
-end Behavioral;
+END moore;
