@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/laboratorio/Desktop/sistemas-digitais/porta_senha/porta_senha.srcs/sources_1/new/porta_senha.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity porta_senha
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/laboratorio/Desktop/sistemas-digitais/porta_senha/porta_senha.srcs/sim_1/new/tb_porta_senha.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity tb_porta_senha
