@@ -5,7 +5,6 @@ ENTITY tb_semaforo IS
 END tb_semaforo;
 
 ARCHITECTURE sim OF tb_semaforo IS
-  -- Component declaration
   COMPONENT semaforo
     PORT (
       clk : IN STD_LOGIC;
@@ -16,7 +15,6 @@ ARCHITECTURE sim OF tb_semaforo IS
     );
   END COMPONENT;
 
-  -- Signals to connect to DUT
   SIGNAL clk : STD_LOGIC := '0';
   SIGNAL reset : STD_LOGIC := '0';
   SIGNAL verde : STD_LOGIC;
@@ -32,7 +30,7 @@ BEGIN
     vermelho => vermelho
   );
 
-  -- Clock generation
+  -- Geração do clock
   clk_process : PROCESS
   BEGIN
     WHILE true LOOP
@@ -44,7 +42,7 @@ BEGIN
     WAIT;
   END PROCESS;
 
-  -- Stimulus process
+  
   stim_proc : PROCESS
   BEGIN
     -- Inicializa com reset
